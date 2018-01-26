@@ -2,7 +2,7 @@ const pull = require('pull-stream')
 const shortid = require('shortid')
 const log = require('./log')
 const { getRandomInt } = require('./random')
-const sink = require('../sink')
+const { sink } = require('../')
 
 log('iframe ready')
 

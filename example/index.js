@@ -1,6 +1,6 @@
 const pull = require('pull-stream')
 const log = require('./log')
-const source = require('../source')
+const { source } = require('../')
 
 const iframe = document.querySelector('iframe')
 const postMessage = iframe.contentWindow.postMessage.bind(iframe.contentWindow)
