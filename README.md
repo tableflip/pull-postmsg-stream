@@ -83,7 +83,7 @@ Creates a new [source stream](https://github.com/pull-stream/pull-stream/blob/ma
 
 ## Contribute
 
-Feel free to dive in! [Open an issue](https://github.com/tableflip/pull-postmsg-proxy/issues/new) or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/tableflip/pull-postmsg-stream/issues/new) or submit PRs.
 
 ## License
 
