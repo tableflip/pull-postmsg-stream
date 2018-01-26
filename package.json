@@ -1,0 +1,34 @@
+{
+  "name": "pull-postmsg-stream",
+  "version": "0.0.0",
+  "description": "Single direction pull-stream over postMessage",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard",
+    "test": "run-s lint test:build",
+    "test:build": "run-p test:build:*",
+    "test:build:main": "browserify test/main.js -o test/main.bundle.js",
+    "test:build:iframe": "browserify test/iframe.js -o test/iframe.bundle.js",
+    "test:watch": "run-p test:watch:*",
+    "test:watch:main": "watchify test/main.js -o test/main.bundle.js -v",
+    "test:watch:iframe": "watchify test/iframe.js -o test/iframe.bundle.js -v",
+    "test:serve": "ecstatic ./test --port 3000"
+  },
+  "dependencies": {
+    "postmsg-rpc": "^2.1.1"
+  },
+  "devDependencies": {
+    "browserify": "^15.2.0",
+    "ecstatic": "^3.1.1",
+    "npm-run-all": "^4.1.2",
+    "pull-stream": "^3.6.1",
+    "shortid": "^2.2.8",
+    "standard": "^10.0.3"
+  },
+  "keywords": [
+    "postMessage",
+    "pull-stream"
+  ],
+  "author": "Alan Shaw",
+  "license": "MIT"
+}
