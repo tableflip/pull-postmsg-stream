@@ -2,7 +2,7 @@ const { caller } = require('postmsg-rpc')
 const { post } = require('prepost')
 
 module.exports = function source (readFnName, opts) {
-  const read = caller(readFnName, opts)
+  const read = post(caller(readFnName, opts), opts.post)
 
   return (end, cb) => {
     // Serialize error into something structured cloneable
@@ -13,6 +13,6 @@ module.exports = function source (readFnName, opts) {
       }, end.output && end.output.payload)
     }
 
-    post(read(end), opts.post).then((res) => cb(res.end, res.data)).catch(cb)
+    read(end).then((res) => cb(res.end, res.data)).catch(cb)
   }
 }
