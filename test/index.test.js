@@ -141,3 +141,45 @@ test.cb('should handle main error gracefully', (t) => {
     })
   )
 })
+
+test.cb('should pull data over postMessage with pre and post functions', (t) => {
+  const mainWin = mockWindow()
+  const iframeWin = mockWindow()
+
+  const readFnName = shortid()
+  const data = Array(getRandomInt(100, 500)).fill(0).map(shortid)
+
+  let postCalled = false
+  let preCalled = false
+
+  pull(
+    pull.values(data),
+    PMS.sink(readFnName, {
+      addListener: iframeWin.addEventListener,
+      removeListener: iframeWin.removeEventListener,
+      postMessage: mainWin.postMessage,
+      post: (res) => {
+        postCalled = true
+        return res
+      }
+    })
+  )
+
+  pull(
+    PMS.source(readFnName, {
+      addListener: mainWin.addEventListener,
+      removeListener: mainWin.removeEventListener,
+      postMessage: iframeWin.postMessage,
+      pre: (...args) => {
+        preCalled = true
+        return args
+      }
+    }),
+    pull.collect((err, pulledData) => {
+      t.ifError(err)
+      t.true(postCalled)
+      t.true(preCalled)
+      t.end()
+    })
+  )
+})

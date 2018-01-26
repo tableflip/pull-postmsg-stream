@@ -17,7 +17,8 @@
     "example:serve": "ecstatic ./example --port 3000"
   },
   "dependencies": {
-    "postmsg-rpc": "^2.1.1"
+    "postmsg-rpc": "^2.1.1",
+    "prepost": "^1.0.1"
   },
   "devDependencies": {
     "ava": "^0.24.0",

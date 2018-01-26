@@ -71,6 +71,7 @@ Creates a new [sink stream](https://github.com/pull-stream/pull-stream/blob/mast
 
 * `readFnName` - the name of the function that `postmsg-rpc` will expose for a `PMS.source` stream to read from
 * `options` - options passed directly to `postmsg-rpc` `expose`, see [docs here](https://github.com/tableflip/postmsg-rpc#exposefuncname-func-options)
+    * `options.post` - function to call after read, see [docs here](https://github.com/tableflip/prepost#postfunc-postfunc--postfunc1-postfunc2-)
 
 Note that if you're going to create multiple streams, you'll need to generate a new `readFnName` for each stream and somehow communicate that to your other window so that it can create a `PMS.source` that reads from the correct place.
 
@@ -80,6 +81,7 @@ Creates a new [source stream](https://github.com/pull-stream/pull-stream/blob/ma
 
 * `readFnName` - the same name that was passed to `PMS.sink`, allowing the source to read from the sink
 * `options` - options passed directly to `postmsg-rpc` `caller`, see [docs here](https://github.com/tableflip/postmsg-rpc#callerfuncname-options)
+    * `options.pre` - function to call before read, see [docs here](https://github.com/tableflip/prepost#preprefunc-prefunc1-prefunc2--func)
 
 ## Contribute
 
