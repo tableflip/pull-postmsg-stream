@@ -2,8 +2,9 @@ const { caller } = require('postmsg-rpc')
 
 module.exports = function source (readFnName, opts) {
   const read = caller(readFnName, opts)
+
   return (end, cb) => {
-    // Convert Error into something structured cloneable
+    // Serialize error into something structured cloneable
     if (end && end !== true) {
       end = Object.assign({
         message: end.message,
