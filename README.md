@@ -42,10 +42,10 @@ pull(
 )
 ```
 
-1. The window that _has_ the data calls `PMS.sink`, which **exposes** a function called "read" and returns a [sink stream](https://github.com/pull-stream/pull-stream/blob/master/docs/spec.md#sink-streams)
-2. The window that _wants_ the data calls `PMS.source`, which creates a **caller** function for "read" and returns a [source stream](https://github.com/pull-stream/pull-stream/blob/master/docs/spec.md#source-streams)
+1. The window that _has_ the data calls `PMS.sink`, which **exposes** a function called "read" & returns a [sink stream](https://github.com/pull-stream/pull-stream/blob/master/docs/spec.md#sink-streams)
+2. The window that _wants_ the data calls `PMS.source`, which creates a **caller** function for "read" & returns a [source stream](https://github.com/pull-stream/pull-stream/blob/master/docs/spec.md#source-streams)
 3. In the window that _wants_ the data, the `pull(...)` pipeline starts the flow of data from the `PMS.source` stream
-4. When data is requested from the `PMS.source` stream, it calls the exposed "read" function in the window that _has_ the data
+4. When data is requested from the `PMS.source` stream, it calls the exposed "read" function
 5. This causes the `PMS.sink` stream in the window that _has_ the data to pull out of `pull.values` and return it all the way back to `pull.collect` in the window that _wants_ the data
 
 See the [example](example) for complete code.
