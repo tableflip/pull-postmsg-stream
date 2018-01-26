@@ -81,7 +81,7 @@ Creates a new [source stream](https://github.com/pull-stream/pull-stream/blob/ma
 
 * `readFnName` - the same name that was passed to `PMS.sink`, allowing the source to read from the sink
 * `options` - options passed directly to `postmsg-rpc` `caller`, see [docs here](https://github.com/tableflip/postmsg-rpc#callerfuncname-options)
-    * `options.pre` - function to call before read, see [docs here](https://github.com/tableflip/prepost#preprefunc-prefunc1-prefunc2--func)
+    * `options.post` - function to call after read, see [docs here](https://github.com/tableflip/prepost#postfunc-postfunc--postfunc1-postfunc2-)
 
 ## Contribute
 
