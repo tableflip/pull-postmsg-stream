@@ -35,5 +35,17 @@
     "pull-stream"
   ],
   "author": "Alan Shaw",
-  "license": "MIT"
+  "license": "MIT",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tableflip/pull-postmsg-stream.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tableflip/pull-postmsg-stream/issues"
+  },
+  "homepage": "https://github.com/tableflip/pull-postmsg-stream#readme"
 }
