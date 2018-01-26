@@ -1,6 +1,6 @@
 {
   "name": "pull-postmsg-stream",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Pull streams over window.postMessage",
   "main": "src/index.js",
   "scripts": {
