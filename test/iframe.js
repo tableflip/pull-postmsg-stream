@@ -7,6 +7,7 @@ const sink = require('../sink')
 log('iframe ready')
 
 const readFnName = `readMe-${shortid()}`
+const postMessage = window.parent.postMessage.bind(window.parent)
 
 pull(
   pull.values(Array(getRandomInt(5, 50)).fill(0).map(shortid)),
@@ -20,9 +21,7 @@ pull(
       cb(null, data)
     }, delay)
   }),
-  sink(readFnName, {
-    postMessage: window.parent.postMessage.bind(window.parent)
-  })
+  sink(readFnName, { postMessage })
 )
 
 log('sending readFnName', readFnName)
