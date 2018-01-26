@@ -1,7 +1,7 @@
 {
   "name": "pull-postmsg-stream",
   "version": "0.0.0",
-  "description": "Single direction pull-stream over postMessage",
+  "description": "Pull streams over window.postMessage",
   "main": "index.js",
   "scripts": {
     "lint": "standard",
