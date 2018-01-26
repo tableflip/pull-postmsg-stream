@@ -19,6 +19,9 @@ npm install pull-postmsg-stream
 To build and run the [example](example), run the following in your terminal:
 
 ```sh
+git clone https://github.com/tableflip/pull-postmsg-stream.git
+cd pull-postmsg-stream
+npm install
 npm run example
 ```
 

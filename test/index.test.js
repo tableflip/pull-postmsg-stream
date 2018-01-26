@@ -65,3 +65,79 @@ test.cb('should clean up all listeners', (t) => {
     })
   )
 })
+
+test.cb('should handle iframe error gracefully', (t) => {
+  const mainWin = mockWindow()
+  const iframeWin = mockWindow()
+
+  const readFnName = shortid()
+  const data = Array(getRandomInt(100, 500)).fill(0).map(shortid)
+  const errIndex = getRandomInt(1, data.length)
+  let index = 0
+
+  pull(
+    pull.values(data),
+    pull.map((data) => {
+      index++
+      if (index === errIndex) throw new Error('BOOM')
+      return data
+    }),
+    sink(readFnName, {
+      addListener: iframeWin.addEventListener,
+      removeListener: iframeWin.removeEventListener,
+      postMessage: mainWin.postMessage
+    })
+  )
+
+  pull(
+    source(readFnName, {
+      addListener: mainWin.addEventListener,
+      removeListener: mainWin.removeEventListener,
+      postMessage: iframeWin.postMessage
+    }),
+    pull.collect((err, pulledData) => {
+      t.truthy(err)
+      t.is(mainWin.listeners.length, 0)
+      t.is(iframeWin.listeners.length, 0)
+      t.end()
+    })
+  )
+})
+
+test.cb('should handle main error gracefully', (t) => {
+  const mainWin = mockWindow()
+  const iframeWin = mockWindow()
+
+  const readFnName = shortid()
+  const data = Array(getRandomInt(100, 500)).fill(0).map(shortid)
+  const errIndex = getRandomInt(1, data.length)
+  let index = 0
+
+  pull(
+    pull.values(data),
+    sink(readFnName, {
+      addListener: iframeWin.addEventListener,
+      removeListener: iframeWin.removeEventListener,
+      postMessage: mainWin.postMessage
+    })
+  )
+
+  pull(
+    source(readFnName, {
+      addListener: mainWin.addEventListener,
+      removeListener: mainWin.removeEventListener,
+      postMessage: iframeWin.postMessage
+    }),
+    pull.map((data) => {
+      index++
+      if (index === errIndex) throw new Error('BOOM')
+      return data
+    }),
+    pull.collect((err, pulledData) => {
+      t.truthy(err)
+      t.is(mainWin.listeners.length, 0)
+      t.is(iframeWin.listeners.length, 0)
+      t.end()
+    })
+  )
+})
