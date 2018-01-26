@@ -2,7 +2,7 @@ const pull = require('pull-stream')
 const shortid = require('shortid')
 const log = require('./log')
 const { getRandomInt } = require('./random')
-const { sink } = require('../')
+const PMS = require('../')
 
 log('iframe ready')
 
@@ -21,7 +21,7 @@ pull(
       cb(null, data)
     }, delay)
   }),
-  sink(readFnName, { postMessage })
+  PMS.sink(readFnName, { postMessage })
 )
 
 log('sending readFnName', readFnName)

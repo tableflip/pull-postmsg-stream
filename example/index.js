@@ -1,6 +1,6 @@
 const pull = require('pull-stream')
 const log = require('./log')
-const { source } = require('../')
+const PMS = require('../')
 
 const iframe = document.querySelector('iframe')
 const postMessage = iframe.contentWindow.postMessage.bind(iframe.contentWindow)
@@ -10,7 +10,7 @@ window.addEventListener('message', (msg) => {
   log('got read function name', msg.data.readFnName)
 
   pull(
-    source(msg.data.readFnName, { postMessage }),
+    PMS.source(msg.data.readFnName, { postMessage }),
     pull.drain(
       (data) => log('pulled data', data),
       () => log('drained')

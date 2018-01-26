@@ -1,7 +1,7 @@
 const test = require('ava')
 const shortid = require('shortid')
 const pull = require('pull-stream')
-const { sink, source } = require('../')
+const PMS = require('../')
 const mockWindow = require('./helpers/mock-window')
 const { getRandomInt } = require('./helpers/random')
 
@@ -14,7 +14,7 @@ test.cb('should pull data over postMessage', (t) => {
 
   pull(
     pull.values(data),
-    sink(readFnName, {
+    PMS.sink(readFnName, {
       addListener: iframeWin.addEventListener,
       removeListener: iframeWin.removeEventListener,
       postMessage: mainWin.postMessage
@@ -22,7 +22,7 @@ test.cb('should pull data over postMessage', (t) => {
   )
 
   pull(
-    source(readFnName, {
+    PMS.source(readFnName, {
       addListener: mainWin.addEventListener,
       removeListener: mainWin.removeEventListener,
       postMessage: iframeWin.postMessage
@@ -44,7 +44,7 @@ test.cb('should clean up all listeners', (t) => {
 
   pull(
     pull.values(data),
-    sink(readFnName, {
+    PMS.sink(readFnName, {
       addListener: iframeWin.addEventListener,
       removeListener: iframeWin.removeEventListener,
       postMessage: mainWin.postMessage
@@ -52,7 +52,7 @@ test.cb('should clean up all listeners', (t) => {
   )
 
   pull(
-    source(readFnName, {
+    PMS.source(readFnName, {
       addListener: mainWin.addEventListener,
       removeListener: mainWin.removeEventListener,
       postMessage: iframeWin.postMessage
@@ -82,7 +82,7 @@ test.cb('should handle iframe error gracefully', (t) => {
       if (index === errIndex) throw new Error('BOOM')
       return data
     }),
-    sink(readFnName, {
+    PMS.sink(readFnName, {
       addListener: iframeWin.addEventListener,
       removeListener: iframeWin.removeEventListener,
       postMessage: mainWin.postMessage
@@ -90,7 +90,7 @@ test.cb('should handle iframe error gracefully', (t) => {
   )
 
   pull(
-    source(readFnName, {
+    PMS.source(readFnName, {
       addListener: mainWin.addEventListener,
       removeListener: mainWin.removeEventListener,
       postMessage: iframeWin.postMessage
@@ -115,7 +115,7 @@ test.cb('should handle main error gracefully', (t) => {
 
   pull(
     pull.values(data),
-    sink(readFnName, {
+    PMS.sink(readFnName, {
       addListener: iframeWin.addEventListener,
       removeListener: iframeWin.removeEventListener,
       postMessage: mainWin.postMessage
@@ -123,7 +123,7 @@ test.cb('should handle main error gracefully', (t) => {
   )
 
   pull(
-    source(readFnName, {
+    PMS.source(readFnName, {
       addListener: mainWin.addEventListener,
       removeListener: mainWin.removeEventListener,
       postMessage: iframeWin.postMessage
