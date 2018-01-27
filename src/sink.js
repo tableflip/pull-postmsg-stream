@@ -23,7 +23,7 @@ module.exports = function sink (readFnName, opts) {
           resolve({ end, data })
         })
       }),
-      opts.post
+      opts && opts.post
     ), opts)
   }
 }
